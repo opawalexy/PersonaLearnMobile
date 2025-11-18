@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PersonaLearn – Personalized Learning Hub (Investor Demo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #020617;              /* page background */
+      --bg-gradient-top: #020617;
+      --bg-gradient-bottom: #020617;
+      --card: #020617;
+      --card-soft: #020617;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #0ea5e9;
+      --accent-soft: rgba(14, 165, 233, 0.1);
+      --accent-border: rgba(56, 189, 248, 0.6);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      width: 100%;
+    }
+
+    .page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.98)
+      );
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: var(--radius-pill);
+      background: conic-gradient(
+        from 180deg,
+        #22d3ee,
+        #6366f1,
+        #0ea5e9,
+        #22d3ee
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .brand-text p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+      color: #cbd5f5;
+    }
+
+    .nav-links button {
+      border: none;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-links button:hover {
+      color: var(--text);
+    }
+
+    .btn-primary {
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1rem;
+      border: none;
+      background: var(--accent);
+      color: #020617;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #38bdf8;
+    }
+
+    .btn-ghost {
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 0.9rem;
+      border: 1px solid #1e293b;
+      background: transparent;
+      color: #cbd5f5;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      border-bottom: 1px solid #020617;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+    }
+
+    .hero-inner {
+      padding: 2.7rem 0 2.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-border);
+      background: var(--accent-soft);
+      color: #7dd3fc;
+      font-size: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+      line-height: 1.2;
+      margin: 0 0 1rem;
+      font-weight: 650;
+    }
+
+    @media (min-width: 900px) {
+      .hero-title {
+        font-size: 2.7rem;
+      }
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtext {
+      max-width: 40rem;
+      font-size: 1rem;
+      color: #e2e8f0;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      color: #cbd5f5;
+    }
+
+    .hero-steps li {
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-tag {
+      border-radius: var(--radius-pill);
+      border: 1px solid #1e293b;
+      padding: 0.3rem 0.8rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .card {
+      background: radial-gradient(circle at top, #020617 0, #020617 80%);
+      border-radius: var(--radius-lg);
+      border: 1px solid #0f172a;
+      padding: 1.2rem 1.1rem;
+      font-size: 0.95rem;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid #1e293b;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+    }
+
+    .step-item {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .step-number {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #020617;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      margin: 0;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .step-desc {
+      margin: 0.2rem 0 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Main section */
+    .main-section {
+      padding: 2.8rem 0 3rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin: 0 0 0.3rem;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0 0 1.1rem;
+    }
+
+    .card-section {
+      background: #020617;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.1rem;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title-row h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .card-subtext {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .step-circle {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #020617;
+      flex-shrink: 0;
+    }
+
+    /* B2B strip */
+    .b2b-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .b2b-card {
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 0.9rem;
+    }
+
+    .b2b-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .b2b-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .b2b-metric {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin-bottom: 0.2rem;
+    }
+
+    .b2b-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .b2b-strip {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Layout grids */
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.7rem;
+    }
+
+    @media (max-width: 980px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .upload-and-market {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 900px) {
+      .upload-and-market {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Upload */
+    .upload-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      padding: 1.2rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px dashed #374151;
+      background: #020617;
+      cursor: pointer;
+      transition: border 0.2s ease, background 0.2s ease;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent);
+      background: #020617;
+    }
+
+    .upload-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 18px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .upload-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .upload-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 19rem;
+    }
+
+    .upload-tags {
+      margin-top: 0.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .upload-tag {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.25rem 0.7rem;
+    }
+
+    /* Marketplace */
+    .market-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .market-card {
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.65rem;
+    }
+
+    .market-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 14px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .market-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .market-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .market-tags {
+      margin-top: 0.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .market-tag-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.2rem 0.6rem;
+    }
+
+    .market-link {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Fields */
+    .field {
+      margin-bottom: 0.8rem;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      background: #020617;
+      color: var(--text);
+      padding: 0.5rem 0.8rem;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+    }
+
+    .field-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 720px) {
+      .field-grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Modalities + Avatar */
+    .modalities-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .modalities-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .modalities-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.7rem;
+      font-size: 0.95rem;
+    }
+
+    .modalities-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .modalities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .modalities-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .modality-card {
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .modality-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .modality-main {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .modality-main span.emoji {
+      font-size: 1.2rem;
+    }
+
+    .modality-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .modality-time {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .modality-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .modality-providers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .modality-provider-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.2rem 0.6rem;
+    }
+
+    /* Avatar */
+    .avatar-card {
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.85rem;
+      font-size: 0.95rem;
+    }
+
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .avatar-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .avatar-item {
+      border-radius: 16px;
+      border: 1px solid #374151;
+      background: #020617;
+      padding: 0.45rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .avatar-emoji {
+      font-size: 1.5rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .avatar-name {
+      font-weight: 500;
+      margin-bottom: 0.05rem;
+    }
+
+    .avatar-tag {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .avatar-note {
+      margin-top: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Orchestration & Providers */
+    .orchestration-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 1.7rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 980px) {
+      .orchestration-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .orchestration-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .orchestration-header span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .node-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    @media (min-width: 768px) {
+      .node-row {
+        flex-direction: row;
+      }
+    }
+
+    .node-card {
+      flex: 1;
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.85rem;
+      font-size: 0.95rem;
+    }
+
+    .node-label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .node-main {
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+    }
+
+    .node-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 14px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .node-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .node-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .node-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    .chip {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.2rem 0.6rem;
+    }
+
+    .node-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .orchestration-footer {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media (min-width: 768px) {
+      .orchestration-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .btn-run {
+      border-radius: var(--radius-pill);
+      border: none;
+      background: var(--accent);
+      color: #020617;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    /* Providers */
+    .providers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .provider-item {
+      display: flex;
+      gap: 0.6rem;
+      border-radius: var(--radius-md);
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.7rem;
+    }
+
+    .provider-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 14px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .provider-header {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .provider-name {
+      font-weight: 500;
+      font-size: 0.98rem;
+    }
+
+    .provider-badge {
+      border-radius: var(--radius-pill);
+      border: 1px solid #374151;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .provider-role {
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .providers-footer {
+      margin-top: 0.9rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid #1f2937;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #020617;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* ===== EXTRA MOBILE TWEAKS ===== */
+    @media (max-width: 600px) {
+      body {
+        font-size: 15px;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav {
+        padding: 0.7rem 0;
+      }
+
+      .hero-inner {
+        padding: 2rem 0 2rem;
+        gap: 1.8rem;
+      }
+
+      .hero-title {
+        font-size: 1.9rem;
+      }
+
+      .hero-subtext {
+        font-size: 0.95rem;
+      }
+
+      .card,
+      .card-section {
+        padding: 1rem 0.9rem;
+      }
+
+      .card-header,
+      .modalities-header,
+      .orchestration-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        text-align: center;
+      }
+
+      .b2b-strip {
+        gap: 0.8rem;
+      }
+
+      .upload-area {
+        padding: 1rem 0.8rem;
+      }
+
+      .market-card {
+        align-items: flex-start;
+      }
+
+      .main-section {
+        padding: 2rem 0 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-icon">PL</div>
+          <div class="brand-text">
+            <h1>PersonaLearn</h1>
+            <p>Marketplace &amp; AI hub for personalized learning at scale.</p>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <button>Use cases</button>
+          <button>Pricing</button>
+          <button>Docs</button>
+          <button class="btn-ghost">Sign in</button>
+          <button class="btn-primary">Get a demo</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            Investor demo · AI-personalized education platform
+          </div>
+          <h2 class="hero-title">
+            From one curriculum to <span>millions of personalized learning journeys.</span>
+          </h2>
+          <p class="hero-subtext">
+            PersonaLearn is a B2B and marketplace platform where schools, companies, and creators
+            can upload or list curriculums, plug into multiple AI providers, and let each learner
+            choose their own persona, teacher avatar, and preferred learning format.
+          </p>
+          <ul class="hero-steps">
+            <li>• Select a curriculum from the marketplace or upload internal training content.</li>
+            <li>• Define the learner persona: age, role, learning style, time, language, accessibility.</li>
+            <li>• Learners choose teacher avatars &amp; formats: slides, flashcards, videos, podcasts, quizzes.</li>
+            <li>• PersonaLearn orchestrates OpenAI, HeyGen, NotebookLM, Google “Learn Your Way”, and more.</li>
+          </ul>
+          <div class="hero-tags">
+            <span class="hero-tag">K–12 &amp; higher education</span>
+            <span class="hero-tag">Corporate L&amp;D</span>
+            <span class="hero-tag">EdTech creators</span>
+          </div>
+          <div class="hero-cta-row">
+            <button class="btn-primary">Walk through the flow</button>
+            <button class="btn-ghost">View B2B pricing tiers</button>
+          </div>
+        </div>
+
+        <!-- Hero right: workflow summary -->
+        <div class="card">
+          <div class="card-header">
+            <h3>How PersonaLearn fits into your stack</h3>
+            <span class="badge">Multi-tenant · API-first</span>
+          </div>
+          <div>
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div>
+                <p class="step-title">Connect content sources</p>
+                <p class="step-desc">
+                  Plug in LMS, drive, or marketplace courses. PersonaLearn ingests syllabi, handbooks,
+                  and lesson plans into a unified curriculum layer.
+                </p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div>
+                <p class="step-title">Define personas &amp; policies</p>
+                <p class="step-desc">
+                  Admins and teachers set guardrails, persona templates, and allowed AI providers per tenant.
+                </p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div>
+                <p class="step-title">Learners personalize their experience</p>
+                <p class="step-desc">
+                  Each learner chooses avatar, difficulty, and formats. PersonaLearn generates assets on demand,
+                  grounded on your content.
+                </p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">4</div>
+              <div>
+                <p class="step-title">Measure ROI</p>
+                <p class="step-desc">
+                  Track engagement, completion, and assessment uplift by persona, cohort, and content provider.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main -->
+    <section class="main-section">
+      <div class="container">
+        <!-- B2B snapshot -->
+        <div class="card-section">
+          <h2 class="section-title">Why PersonaLearn for B2B</h2>
+          <p class="section-subtitle">
+            Built to help institutions scale truly personalized learning without scaling headcount.
+          </p>
+          <div class="b2b-strip">
+            <div class="b2b-card">
+              <div class="b2b-label">For schools &amp; universities</div>
+              <div class="b2b-title">Differentiated instruction at scale</div>
+              <div class="b2b-metric">✓ 1 curriculum → many personas</div>
+              <div class="b2b-note">Support mixed-ability classrooms with auto-generated versions for different ages and levels.</div>
+            </div>
+            <div class="b2b-card">
+              <div class="b2b-label">For companies &amp; L&amp;D teams</div>
+              <div class="b2b-title">Faster onboarding &amp; upskilling</div>
+              <div class="b2b-metric">✓ Reduce “time to productivity”</div>
+              <div class="b2b-note">Turn static playbooks and SOPs into interactive onboarding journeys, tailored by role.</div>
+            </div>
+            <div class="b2b-card">
+              <div class="b2b-label">For creators &amp; edtech platforms</div>
+              <div class="b2b-title">New revenue layer</div>
+              <div class="b2b-metric">✓ Per-learner personalization</div>
+              <div class="b2b-note">Creators list their curriculum once and earn from personalized variants across segments.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 1: Curriculum source -->
+        <div class="card-section">
+          <h2 class="section-title">1. Curriculum source</h2>
+          <p class="section-subtitle">
+            Start from your own internal content or from marketplace courses published by certified creators.
+          </p>
+
+          <div class="upload-and-market">
+            <!-- Upload -->
+            <div>
+              <div class="card-title-row">
+                <div class="step-circle">A</div>
+                <h3>Upload internal content</h3>
+              </div>
+              <p class="card-subtext">
+                Connect your LMS or drag-and-drop a syllabus, handbook, or deck. PersonaLearn can sit on top of Canvas, Moodle,
+                Google Drive, SharePoint, or internal knowledge bases.
+              </p>
+              <label class="upload-area">
+                <div class="upload-icon">📁</div>
+                <div class="upload-title">Drop a file here, or click to browse</div>
+                <div class="upload-desc">
+                  PDF, PPT, DOCX, LMS export, or zipped course module. (Demo only – does not upload.)
+                </div>
+                <input type="file" style="display:none;" />
+              </label>
+              <div class="upload-tags">
+                <span class="upload-tag">LMS: Canvas / Moodle</span>
+                <span class="upload-tag">Google Drive / SharePoint</span>
+                <span class="upload-tag">PDF / PPT / DOCX</span>
+              </div>
+            </div>
+
+            <!-- Marketplace -->
+            <div>
+              <div class="card-title-row">
+                <div class="step-circle">B</div>
+                <h3>Or choose from the marketplace</h3>
+              </div>
+              <p class="card-subtext">
+                A catalog of ready-to-personalize curriculums from verified creators. Learners still personalize the format and avatar.
+              </p>
+              <div class="market-list">
+                <div class="market-card">
+                  <div class="market-icon">📊</div>
+                  <div>
+                    <div class="market-title">Algebra Basics (Grades 6–8)</div>
+                    <div class="market-meta">By: MathMentor Labs · ★ 4.8 · 12-week scope &amp; sequence</div>
+                    <div class="market-tags">
+                      <span class="market-tag-pill">K–12</span>
+                      <span class="market-tag-pill">Quizzes</span>
+                      <span class="market-tag-pill">Projects</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="market-card">
+                  <div class="market-icon">💻</div>
+                  <div>
+                    <div class="market-title">Intro to HTML &amp; CSS for Kids</div>
+                    <div class="market-meta">By: CodePlay Studio · ★ 4.9 · Ages 8–12</div>
+                    <div class="market-tags">
+                      <span class="market-tag-pill">Coding</span>
+                      <span class="market-tag-pill">Hands-on</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="market-card">
+                  <div class="market-icon">🧠</div>
+                  <div>
+                    <div class="market-title">Data Literacy for Business Teams</div>
+                    <div class="market-meta">By: InsightBridge · ★ 4.7 · Professionals</div>
+                    <div class="market-tags">
+                      <span class="market-tag-pill">Corporate</span>
+                      <span class="market-tag-pill">Case studies</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="market-link">View full creator marketplace →</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Learner persona -->
+        <div class="card-section">
+          <h2 class="section-title">2. Learner persona</h2>
+          <p class="section-subtitle">
+            Instead of designing one static course, admins and teachers design for personas. PersonaLearn generates variations automatically.
+          </p>
+
+          <div class="field">
+            <label>Learner name or cohort</label>
+            <input type="text" placeholder="e.g. Timi, Jade, 'Sales Onboarding – US Team'" />
+          </div>
+
+          <div class="field-grid-2">
+            <div class="field">
+              <label>Age / role</label>
+              <select>
+                <option>Child (6–12)</option>
+                <option>Teen (13–18)</option>
+                <option selected>Adult – Individual contributor</option>
+                <option>Adult – Manager / leader</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Context</label>
+              <select>
+                <option>Primary / Middle School</option>
+                <option>High School</option>
+                <option selected>University / College</option>
+                <option>Corporate – Onboarding</option>
+                <option>Corporate – Upskilling</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid-2">
+            <div class="field">
+              <label>Goal</label>
+              <select>
+                <option>Exam preparation</option>
+                <option>Concept mastery</option>
+                <option>Project-based learning</option>
+                <option selected>Skill up for work</option>
+                <option>Compliance / mandatory training</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Difficulty preference</label>
+              <select>
+                <option>Very gentle</option>
+                <option selected>Beginner-friendly</option>
+                <option>Standard / balanced</option>
+                <option>Advanced / fast-paced</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid-2">
+            <div class="field">
+              <label>Time available per day</label>
+              <select>
+                <option>10–15 minutes</option>
+                <option selected>20–30 minutes</option>
+                <option>45 minutes</option>
+                <option>60+ minutes</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Preferred session length</label>
+              <select>
+                <option>Short bursts (5–10 min)</option>
+                <option selected>Medium (15–25 min)</option>
+                <option>Deep focus (30–45 min)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid-2">
+            <div class="field">
+              <label>Learning style</label>
+              <select>
+                <option>Visual (diagrams, slides)</option>
+                <option>Auditory (audio, podcast)</option>
+                <option>Reading / writing</option>
+                <option>Hands-on / project-based</option>
+                <option selected>Mixed / flexible</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Tone &amp; personality</label>
+              <select>
+                <option>Playful &amp; game-like</option>
+                <option selected>Friendly &amp; encouraging</option>
+                <option>Serious &amp; academic</option>
+                <option>Professional &amp; concise</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid-2">
+            <div class="field">
+              <label>Language</label>
+              <select>
+                <option selected>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+                <option>Portuguese</option>
+                <option>Other / multilingual</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Accessibility &amp; special considerations</label>
+              <input type="text" placeholder="e.g. dyslexia-friendly, low-vision, short attention span" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Formats & avatar -->
+        <div class="card-section">
+          <h2 class="section-title">3. Choose formats &amp; teacher avatar</h2>
+          <p class="section-subtitle">
+            The same curriculum can appear as narrated slides, flashcards, explainer video, or podcast – voiced by a teacher avatar
+            that matches the learner persona.
+          </p>
+
+          <div class="modalities-layout">
+            <!-- Formats -->
+            <div>
+              <div class="modalities-header">
+                <p><strong>Output formats</strong></p>
+                <p>In production, learners and admins toggle these on or off per course.</p>
+              </div>
+              <div class="modalities-grid">
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">📽️</span>
+                      <div class="modality-title">Narrated slides</div>
+                    </div>
+                    <div class="modality-time">~5–10 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    Slide decks with speaker notes and narration tuned to persona and role.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">OpenAI</span>
+                    <span class="modality-provider-pill">HeyGen</span>
+                  </div>
+                </div>
+
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">🃏</span>
+                      <div class="modality-title">Flashcards</div>
+                    </div>
+                    <div class="modality-time">~2–5 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    Spaced-repetition flashcards for core concepts and definitions.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">OpenAI</span>
+                  </div>
+                </div>
+
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">🎬</span>
+                      <div class="modality-title">Explainer video</div>
+                    </div>
+                    <div class="modality-time">~5–15 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    Avatar-based videos that introduce or recap each module.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">OpenAI</span>
+                    <span class="modality-provider-pill">HeyGen</span>
+                  </div>
+                </div>
+
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">🎙️</span>
+                      <div class="modality-title">Podcast / audio lessons</div>
+                    </div>
+                    <div class="modality-time">~5–10 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    NotebookLM-style conversational episodes learners can listen to on the go.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">NotebookLM-style</span>
+                    <span class="modality-provider-pill">OpenAI</span>
+                  </div>
+                </div>
+
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">📚</span>
+                      <div class="modality-title">Quizzes &amp; practice</div>
+                    </div>
+                    <div class="modality-time">~3–7 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    Formative assessments with explanations and remediation paths.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">OpenAI</span>
+                  </div>
+                </div>
+
+                <div class="modality-card">
+                  <div class="modality-top">
+                    <div class="modality-main">
+                      <span class="emoji">📝</span>
+                      <div class="modality-title">Study guide / learning path</div>
+                    </div>
+                    <div class="modality-time">~3–7 min</div>
+                  </div>
+                  <div class="modality-desc">
+                    A structured roadmap broken into daily micro-lessons and check-ins.
+                  </div>
+                  <div class="modality-providers">
+                    <span class="modality-provider-pill">OpenAI</span>
+                    <span class="modality-provider-pill">Google Learn Your Way</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Avatar picker -->
+            <div>
+              <div class="avatar-card">
+                <p style="margin:0 0 0.3rem;"><strong>Teacher avatar</strong></p>
+                <p style="margin:0;font-size:0.9rem;color:var(--muted);">
+                  Learners can choose who “teaches” them – mapping to tone, pacing, examples, and even voice.
+                </p>
+                <div class="avatar-grid">
+                  <div class="avatar-item">
+                    <div class="avatar-emoji">🧑🏽‍🏫</div>
+                    <div class="avatar-name">Coach Alex</div>
+                    <div class="avatar-tag">High-energy, sports examples, great for short bursts.</div>
+                  </div>
+                  <div class="avatar-item">
+                    <div class="avatar-emoji">👩🏻‍🔬</div>
+                    <div class="avatar-name">Dr. Rivera</div>
+                    <div class="avatar-tag">Calm, structured, exam-focused explanations.</div>
+                  </div>
+                  <div class="avatar-item">
+                    <div class="avatar-emoji">🧙🏿‍♂️</div>
+                    <div class="avatar-name">Storyteller K</div>
+                    <div class="avatar-tag">Concepts taught through stories &amp; analogies.</div>
+                  </div>
+                </div>
+                <div class="avatar-note">
+                  Behind the scenes, each avatar corresponds to a prompt profile and voice setup (for video &amp; audio) so you can test which style works best per cohort.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Orchestration & providers -->
+        <div class="orchestration-grid">
+          <!-- Orchestration -->
+          <div class="card-section">
+            <div class="orchestration-header">
+              <h2 class="section-title" style="margin-bottom:0;">4. AI orchestration preview</h2>
+              <span>How PersonaLearn coordinates multiple AI APIs.</span>
+            </div>
+
+            <div class="node-row">
+              <div class="node-card">
+                <div class="node-label">Input source</div>
+                <div class="node-main">
+                  <div class="node-icon">📄</div>
+                  <div>
+                    <div class="node-title">Curriculum + persona</div>
+                    <div class="node-sub">
+                      Marketplace or internal curriculum, plus the learner persona (role, level, style, avatar choice, constraints).
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="node-card">
+                <div class="node-label">AI engine stack</div>
+                <div class="node-chips">
+                  <span class="chip">OpenAI</span>
+                  <span class="chip">Google Learn Your Way</span>
+                  <span class="chip">HeyGen</span>
+                  <span class="chip">NotebookLM</span>
+                </div>
+                <div class="node-sub">
+                  PersonaLearn routes each requested format to the right provider:
+                  OpenAI for content understanding and generation, HeyGen for avatar video, NotebookLM-style for podcasts,
+                  and Google for adaptive pacing and “next lesson” recommendations.
+                </div>
+              </div>
+
+              <div class="node-card">
+                <div class="node-label">Outputs</div>
+                <ul class="node-list">
+                  <li class="node-main">
+                    <div class="node-icon">📽️</div>
+                    <div>
+                      <div class="node-title">Slides &amp; videos per persona</div>
+                      <div class="node-sub">
+                        Same learning outcomes, but examples, tone, and pacing tuned to each segment (e.g. managers vs. new grads).
+                      </div>
+                    </div>
+                  </li>
+                  <li class="node-main">
+                    <div class="node-icon">🃏</div>
+                    <div>
+                      <div class="node-title">Flashcards, quizzes, and daily tasks</div>
+                      <div class="node-sub">
+                        Micro-learning units mapped to time-per-day and preferred session length.
+                      </div>
+                    </div>
+                  </li>
+                  <li class="node-main">
+                    <div class="node-icon">🎙️</div>
+                    <div>
+                      <div class="node-title">Podcasts / audio recaps</div>
+                      <div class="node-sub">
+                        Conversational audio that recaps each module and prepares learners before live sessions.
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="orchestration-footer">
+              <p>
+                In production, “Run personalization” triggers a backend orchestrator (Node, Python, or workflow engine)
+                that dispatches jobs to each provider, stores outputs, and exposes them via API and dashboards.
+              </p>
+              <button class="btn-run" title="Demo only – no real APIs wired here">
+                Run personalization (demo)
+              </button>
+            </div>
+          </div>
+
+          <!-- Providers -->
+          <div class="card-section">
+            <h2 class="section-title" style="margin-bottom:0.4rem;">Connected AI providers</h2>
+            <p class="section-subtitle" style="margin-bottom:0.9rem;">
+              PersonaLearn is provider-agnostic: swap models and vendors without redesigning the learner experience.
+            </p>
+
+            <div class="providers-list">
+              <div class="provider-item">
+                <div class="provider-icon">O</div>
+                <div>
+                  <div class="provider-header">
+                    <span class="provider-name">OpenAI</span>
+                    <span class="provider-badge">Core LLM</span>
+                  </div>
+                  <div class="provider-role">
+                    Deep content understanding, rewriting for different ages and roles, generating quizzes,
+                    flashcards, study guides, and explanations with guardrails.
+                  </div>
+                </div>
+              </div>
+
+              <div class="provider-item">
+                <div class="provider-icon">G</div>
+                <div>
+                  <div class="provider-header">
+                    <span class="provider-name">Google “Learn Your Way”</span>
+                    <span class="provider-badge">Adaptive layer</span>
+                  </div>
+                  <div class="provider-role">
+                    Adaptive pacing, recommended paths, and mastery checks that decide what the learner should see next.
+                  </div>
+                </div>
+              </div>
+
+              <div class="provider-item">
+                <div class="provider-icon">H</div>
+                <div>
+                  <div class="provider-header">
+                    <span class="provider-name">HeyGen</span>
+                    <span class="provider-badge">Avatar video</span>
+                  </div>
+                  <div class="provider-role">
+                    Generates presenter-style videos tied to the chosen teacher avatar and script provided by the LLM layer.
+                  </div>
+                </div>
+              </div>
+
+              <div class="provider-item">
+                <div class="provider-icon">N</div>
+                <div>
+                  <div class="provider-header">
+                    <span class="provider-name">NotebookLM</span>
+                    <span class="provider-badge">Podcast style</span>
+                  </div>
+                  <div class="provider-role">
+                    Document-grounded conversations and podcast-like episodes so learners can “listen their way” through content.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="providers-footer">
+              For investors: PersonaLearn’s moat is not just content or a single AI model, but the orchestration layer,
+              persona engine, and marketplace that sit across multiple providers and customer segments.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> PersonaLearn – Personalized Learning Hub (Concept Demo).</p>
+        <p>Built to power B2B personalization for schools, companies, and creators on top of multiple AI models.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
